@@ -3,18 +3,22 @@ import { Button, FormControl, FormHelperText, Input } from '@material-ui/core';
 import { uploadFile } from '../../../../clients/wine-client';
 
 const UploadForm = ({onUpload}) => {
-  let file, name;
+  let file;
 
   const handleFileInput = (event) => {
     file = event.target.files[0];
-    name = event.target.files[0].name;
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let data = new FormData();
+    if (file) {
+      uploadFileAsFormData(file);
+    }
+  }
+
+  const uploadFileAsFormData = (file) => {
+    const data = new FormData();
     data.append('file', file);
-    data.append('name', name);
     uploadFile(data)
       .then((wines) => {
         onUpload(wines);
@@ -36,5 +40,3 @@ const UploadForm = ({onUpload}) => {
     </form>
   );
 }
-
-export default UploadForm;
