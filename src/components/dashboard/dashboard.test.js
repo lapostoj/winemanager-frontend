@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { getWines } from '../../clients/wine-client';
-jest.mock('../../clients/wine-client');
+import { aWine } from '../../test/wine.factory';
 import Dashboard from '.';
+jest.mock('../../clients/wine-client');
 
 describe('Dashboard', () => {
   it('should display no data component if no wine is returned', () => {
@@ -16,10 +17,7 @@ describe('Dashboard', () => {
 
   it('should display wine list component if some wines are returned', () => {
     getWines.mockImplementation(() => Promise.resolve([
-      {
-        name: 'name',
-        color: 'RED',
-      },
+      aWine(),
     ]));
 
     const component = mount(<Dashboard />);

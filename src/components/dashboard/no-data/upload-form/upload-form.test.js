@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { uploadFile } from '../../../../clients/wine-client';
-jest.mock('../../../../clients/wine-client');
 import UploadForm from '.';
+jest.mock('../../../../clients/wine-client');
 
 describe('Upload Form', () => {
   it('should not upload and not call callback if button is pressed without input', () => {
@@ -30,19 +30,23 @@ describe('Upload Form', () => {
     expectedDate.append('file', file);
 
     const component = mount(<UploadForm onUpload={onUpload} />);
-    component.find('input').simulate('change', {
-      target: {
-        files: [file]
-      },
-    });
+    inputFile(component, file);
     clickButton(component);
 
-    expect(uploadFile).toHaveBeenCalled;
+    expect(uploadFile).toHaveBeenCalled();
     setImmediate(() => {
       expect(onUpload).toHaveBeenCalledWith(wines);
     });
   });
 });
+
+function inputFile(component, file) {
+  component.find('input').simulate('change', {
+    target: {
+      files: [file]
+    },
+  });
+}
 
 function clickButton(component) {
   component.find('button').instance().click();
