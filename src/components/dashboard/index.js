@@ -4,7 +4,7 @@ import WineList from './wine-list';
 import { getWines } from '../../clients/wine-client';
 import './dashboard.css';
 
-class Dashboard extends Component {
+export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
@@ -45,5 +45,3 @@ class Dashboard extends Component {
     );
   }
 }
-
-export default Dashboard;

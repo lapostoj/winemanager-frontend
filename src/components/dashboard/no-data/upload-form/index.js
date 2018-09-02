@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, FormControl, FormHelperText, Input } from '@material-ui/core';
 import { uploadFile } from '../../../../clients/wine-client';
 
-const UploadForm = ({onUpload}) => {
+export default function UploadForm({onUpload}) {
   let file;
 
   const handleFileInput = (event) => {
@@ -40,5 +40,3 @@ const UploadForm = ({onUpload}) => {
     </form>
   );
 }
-
-export default UploadForm;

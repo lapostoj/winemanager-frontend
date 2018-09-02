@@ -4,7 +4,7 @@ import { List } from '@material-ui/core';
 import WineListRow from './wine-list-row';
 import './wine-list.css';
 
-const WineList = ({ wines }) => {
+export default function WineList({ wines }) {
   const renderWineRow = (wine, index) => {
     return <WineListRow key={index} wine={wine} className="wine-row" />;
   }
@@ -32,5 +32,3 @@ WineList.propTypes = {
     }),
   ).isRequired,
 };
-
-export default WineList;

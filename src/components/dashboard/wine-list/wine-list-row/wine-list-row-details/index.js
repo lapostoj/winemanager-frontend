@@ -1,7 +1,7 @@
 import React from 'react';
 import Types from 'prop-types';
 
-const WineListRowDetails = ({ bottles }) => {
+export default function WineListRowDetails({ bottles }) {
   const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
   }
@@ -30,5 +30,3 @@ WineListRowDetails.propTypes = {
     }).isRequired
   ).isRequired,
 };
-
-export default WineListRowDetails;

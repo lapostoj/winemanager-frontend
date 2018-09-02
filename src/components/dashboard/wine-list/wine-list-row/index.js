@@ -3,7 +3,7 @@ import Types from 'prop-types';
 import WineListRowDetails from './wine-list-row-details';
 import { Collapse, ListItem, ListItemText } from '@material-ui/core';
 
-class WineListRow extends Component {
+export default class WineListRow extends Component {
   state = {
     open: false,
   }
@@ -47,5 +47,3 @@ WineListRow.propTypes = {
     ).isRequired,
   }),
 };
-
-export default WineListRow;
