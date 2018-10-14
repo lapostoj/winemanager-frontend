@@ -34,6 +34,7 @@ describe('Upload Form', () => {
     clickButton(component);
 
     expect(uploadFile).toHaveBeenCalled();
+    expect(component.find('button').prop('type')).toBe('submit');
     setImmediate(() => {
       expect(onUpload).toHaveBeenCalledWith(wines);
     });
@@ -49,5 +50,5 @@ function inputFile(component, file) {
 }
 
 function clickButton(component) {
-  component.find('button').instance().click();
+  component.find('button').simulate('submit');
 }
