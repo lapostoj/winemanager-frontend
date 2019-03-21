@@ -2,31 +2,44 @@ import React, { Component } from 'react';
 import Types from 'prop-types';
 import WineListRowDetails from './wine-list-row-details';
 import { Collapse, ListItem, ListItemText } from '@material-ui/core';
+import './wine-list-row.css';
 
 export default class WineListRow extends Component {
   state = {
-    open: false,
-  }
+    open: false
+  };
 
-  getClassForWine = (color) => {
+  getClassForWine = color => {
     return color.toLowerCase();
-  }
+  };
 
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
-  }
+  };
 
   render() {
     const { wine } = this.props;
 
     return (
       <React.Fragment>
-        <ListItem button onClick={this.handleClick} className={'wine-row-title ' + this.getClassForWine(wine.color)}>
-          <ListItemText primary={wine.name}/>
-          { this.state.open ? 'Less' : 'More' }
+        <ListItem
+          button
+          onClick={this.handleClick}
+          className={'wine-row-title ' + this.getClassForWine(wine.color)}
+        >
+          <div
+            className={'wine-row-icon ' + this.getClassForWine(wine.color)}
+          />
+          <ListItemText primary={wine.name} />
+          {this.state.open ? 'Less' : 'More'}
         </ListItem>
-        <Collapse in={this.state.open} timeout='auto' unmountOnExit className='wine-row-details'>
-          <WineListRowDetails bottles={wine.bottles}/>
+        <Collapse
+          in={this.state.open}
+          timeout="auto"
+          unmountOnExit
+          className="wine-row-details"
+        >
+          <WineListRowDetails bottles={wine.bottles} />
         </Collapse>
       </React.Fragment>
     );
@@ -42,8 +55,8 @@ WineListRow.propTypes = {
       Types.shape({
         year: Types.number.isRequired,
         size: Types.string.isRequired,
-        quantity: Types.number.isRequired,
+        quantity: Types.number.isRequired
       }).isRequired
-    ).isRequired,
-  }),
+    ).isRequired
+  })
 };

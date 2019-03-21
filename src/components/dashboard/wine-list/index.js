@@ -7,12 +7,14 @@ import './wine-list.css';
 export default function WineList({ wines }) {
   const renderWineRow = (wine, index) => {
     return <WineListRow key={index} wine={wine} className="wine-row" />;
-  }
+  };
 
   return (
-    <List className="wine-list" component="div">
-      { wines.map(renderWineRow) }
-    </List>
+    <div className="wine-list-wrapper">
+      <List className="wine-list" component="div">
+        {wines.map(renderWineRow)}
+      </List>
+    </div>
   );
 }
 
@@ -26,9 +28,9 @@ WineList.propTypes = {
         Types.shape({
           year: Types.number.isRequired,
           size: Types.string.isRequired,
-          quantity: Types.number.isRequired,
+          quantity: Types.number.isRequired
         }).isRequired
-      ).isRequired,
-    }),
-  ).isRequired,
+      ).isRequired
+    })
+  ).isRequired
 };

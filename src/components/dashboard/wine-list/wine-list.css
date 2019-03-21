@@ -1,26 +1,25 @@
+.wine-list-wrapper {
+  margin: auto;
+  min-width: 50%;
+}
+
 .wine-list .wine-row-title {
   display: flex;
   background-color: #bbb;
   padding: 1em 2em;
 }
-
+/* 
 .wine-list .wine-row-title.red {
-  display: flex;
   background-color: #990033;
-  padding: 1em 2em;
 }
 
 .wine-list .wine-row-title.rose {
-  display: flex;
   background-color: #ffcccc;
-  padding: 1em 2em;
 }
 
 .wine-list .wine-row-title.white {
-  display: flex;
   background-color: #ffffcc;
-  padding: 1em 2em;
-}
+} */
 
 .wine-row-details {
   padding: 1em 2em;

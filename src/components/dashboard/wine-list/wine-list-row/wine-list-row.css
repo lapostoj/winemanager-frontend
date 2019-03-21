@@ -1,0 +1,17 @@
+.wine-row-icon {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+}
+
+.wine-row-icon.red {
+  background-color: #990033;
+}
+
+.wine-row-icon.rose {
+  background-color: #ffcccc;
+}
+
+.wine-row-icon.white {
+  background-color: #ffffcc;
+}

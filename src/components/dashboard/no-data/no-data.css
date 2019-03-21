@@ -1,7 +1,10 @@
-.center {
-  text-align: center;
+.no-data-img-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 10%;
 }
 
 .no-data-img {
-  margin-top: 50px;
+  margin: auto;
 }
