@@ -8,8 +8,14 @@ export default function WineListRowDetails({ bottles }) {
   };
 
   const renderBottleInfo = (bottle, index) => {
+    const isLast = index === bottles.length - 1;
     return (
-      <Box key={index} m={3}>
+      <Box
+        key={index}
+        p={3}
+        borderBottom={isLast ? null : 1}
+        borderColor="grey.200"
+      >
         {bottle.quantity} {capitalize(bottle.size)} from {bottle.year}.
       </Box>
     );
