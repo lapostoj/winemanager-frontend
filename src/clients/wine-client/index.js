@@ -3,14 +3,13 @@ const apiBasePath = process.env.REACT_APP_API_BASE_PATH;
 export function getWines() {
   const url = `${apiBasePath}/wines`;
   return fetch(url, {
-    method: 'GET', 
+    method: 'GET',
     headers: new Headers({
-      'Accept': 'application/json',
+      Accept: 'application/json'
     }),
     mode: 'cors',
-    cache: 'no-cache',
-  })
-  .then((response) => {
+    cache: 'no-cache'
+  }).then(response => {
     if (response.ok) {
       return response.json();
     }
@@ -21,15 +20,14 @@ export function getWines() {
 export function uploadFile(data) {
   const url = `${apiBasePath}/import`;
   return fetch(url, {
-    method: 'POST', 
+    method: 'POST',
     headers: new Headers({
-      'Accept': 'application/json',
+      Accept: 'application/json'
     }),
     mode: 'cors',
     cache: 'default',
-    body: data,
-  })
-  .then((response) => {
+    body: data
+  }).then(response => {
     if (response.ok) {
       return response.json();
     }

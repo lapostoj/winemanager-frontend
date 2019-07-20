@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Types from 'prop-types';
+import { Box, Collapse, ListItem, ListItemText } from '@material-ui/core';
+import { ExpandLess, ExpandMore, LabelTwoTone } from '@material-ui/icons';
 import WineListRowDetails from './wine-list-row-details';
-import { Collapse, ListItem, ListItemText } from '@material-ui/core';
-import './wine-list-row.css';
 
 export default class WineListRow extends Component {
   state = {
     open: false
   };
 
-  getClassForWine = color => {
-    return color.toLowerCase();
+  static labelColors = {
+    red: '#990033',
+    rose: '#ffcccc',
+    white: '#e6e6b3'
   };
 
   handleClick = () => {
@@ -21,27 +23,22 @@ export default class WineListRow extends Component {
     const { wine } = this.props;
 
     return (
-      <React.Fragment>
-        <ListItem
-          button
-          onClick={this.handleClick}
-          className={'wine-row-title ' + this.getClassForWine(wine.color)}
-        >
-          <div
-            className={'wine-row-icon ' + this.getClassForWine(wine.color)}
-          />
+      <Box borderBottom={1} borderColor="grey.400">
+        <ListItem button onClick={this.handleClick}>
+          <Box mr={1}>
+            <LabelTwoTone
+              style={{
+                color: WineListRow.labelColors[wine.color.toLowerCase()]
+              }}
+            />
+          </Box>
           <ListItemText primary={wine.name} />
-          {this.state.open ? 'Less' : 'More'}
+          {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse
-          in={this.state.open}
-          timeout="auto"
-          unmountOnExit
-          className="wine-row-details"
-        >
+        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
           <WineListRowDetails bottles={wine.bottles} />
         </Collapse>
-      </React.Fragment>
+      </Box>
     );
   }
 }

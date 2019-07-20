@@ -1,20 +1,24 @@
 import React from 'react';
 import Types from 'prop-types';
-import { List } from '@material-ui/core';
+import { Box, List, Paper, Typography } from '@material-ui/core';
 import WineListRow from './wine-list-row';
-import './wine-list.css';
 
 export default function WineList({ wines }) {
   const renderWineRow = (wine, index) => {
-    return <WineListRow key={index} wine={wine} className="wine-row" />;
+    return <WineListRow key={index} wine={wine} />;
   };
 
   return (
-    <div className="wine-list-wrapper">
-      <List className="wine-list" component="div">
-        {wines.map(renderWineRow)}
-      </List>
-    </div>
+    <Box minWidth="70%" mt={8}>
+      <Paper>
+        <Box p={3}>
+          <Typography variant="h4" gutterBottom>
+            Vos vins
+          </Typography>
+          <List component="div">{wines.map(renderWineRow)}</List>
+        </Box>
+      </Paper>
+    </Box>
   );
 }
 

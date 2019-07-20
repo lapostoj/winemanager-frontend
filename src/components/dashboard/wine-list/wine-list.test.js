@@ -9,19 +9,16 @@ describe('Wine List', () => {
 
     const component = shallow(<WineList wines={wineList} />);
 
-    expect(component.find('.wine-list')).toHaveLength(1);
-    expect(component.find('.wine-row')).toHaveLength(0);
+    expect(component.text()).toContain('Vos vins');
+    expect(component.find('WineListRow')).toHaveLength(0);
   });
 
   it('should render one row per item in the list in props', () => {
-    const wineList = [
-      aWine('RED'),
-      aWine('WHITE'),
-    ];
+    const wineList = [aWine('RED'), aWine('WHITE')];
 
     const component = shallow(<WineList wines={wineList} />);
 
-    expect(component.find('.wine-list')).toHaveLength(1);
-    expect(component.find('.wine-row')).toHaveLength(2);
+    expect(component.text()).toContain('Vos vins');
+    expect(component.find('WineListRow')).toHaveLength(2);
   });
 });

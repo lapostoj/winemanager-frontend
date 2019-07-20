@@ -1,47 +1,50 @@
 import React, { Component } from 'react';
+import { Box, Container } from '@material-ui/core';
 import NoData from './no-data';
 import WineList from './wine-list';
 import { getWines } from '../../clients/wine-client';
-import './dashboard.css';
 
 export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      wineList: [],
+      wineList: []
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.loadWines();
   }
 
   loadWines() {
     getWines()
-      .then((wineList) => {
+      .then(wineList => {
         this.setState({
-          wineList,
+          wineList
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   }
 
   setWines(wines) {
     this.setState({
-      wineList: wines,
+      wineList: wines
     });
   }
 
   render() {
     return (
-      <div className="dashboard">
-        { this.state.wineList.length !== 0 
-          ? <WineList wines={this.state.wineList}/>
-          : <NoData onDataAdded={(wines) => this.setWines(wines)}/> 
-        }
-      </div>
+      <Container classes={{ root: 'dashboard' }}>
+        <Box display="flex" justifyContent="center">
+          {this.state.wineList.length !== 0 ? (
+            <WineList wines={this.state.wineList} />
+          ) : (
+            <NoData onDataAdded={wines => this.setWines(wines)} />
+          )}
+        </Box>
+      </Container>
     );
   }
 }

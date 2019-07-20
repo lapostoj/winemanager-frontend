@@ -1,6 +1,6 @@
 import React from 'react';
 import Types from 'prop-types';
-import './wine-list-row-details.css';
+import { Box } from '@material-ui/core';
 
 export default function WineListRowDetails({ bottles }) {
   const capitalize = string => {
@@ -9,13 +9,13 @@ export default function WineListRowDetails({ bottles }) {
 
   const renderBottleInfo = (bottle, index) => {
     return (
-      <div key={index} className="wine-row-details-row">
+      <Box key={index} m={3}>
         {bottle.quantity} {capitalize(bottle.size)} from {bottle.year}.
-      </div>
+      </Box>
     );
   };
 
-  return <div>{bottles.map(renderBottleInfo)}</div>;
+  return <>{bottles.map(renderBottleInfo)}</>;
 }
 
 WineListRowDetails.propTypes = {
