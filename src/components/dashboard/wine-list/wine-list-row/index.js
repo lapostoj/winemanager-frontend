@@ -1,46 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Types from 'prop-types';
 import { Box, Collapse, ListItem, ListItemText } from '@material-ui/core';
 import { ExpandLess, ExpandMore, LabelTwoTone } from '@material-ui/icons';
 import WineListRowDetails from './wine-list-row-details';
 
-export default class WineListRow extends Component {
-  state = {
-    open: false
-  };
-
-  static labelColors = {
+export default function WineListRow({ wine }) {
+  const labelColors = {
     red: '#990033',
     rose: '#ffcccc',
     white: '#e6e6b3'
   };
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
   };
 
-  render() {
-    const { wine } = this.props;
-
-    return (
-      <Box borderBottom={1} borderColor="grey.400">
-        <ListItem button onClick={this.handleClick}>
-          <Box mr={1}>
-            <LabelTwoTone
-              style={{
-                color: WineListRow.labelColors[wine.color.toLowerCase()]
-              }}
-            />
-          </Box>
-          <ListItemText primary={wine.name} />
-          {this.state.open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-          <WineListRowDetails bottles={wine.bottles} />
-        </Collapse>
-      </Box>
-    );
-  }
+  return (
+    <Box borderBottom={1} borderColor="grey.400">
+      <ListItem button onClick={handleClick}>
+        <Box mr={1}>
+          <LabelTwoTone
+            style={{
+              color: labelColors[wine.color.toLowerCase()]
+            }}
+          />
+        </Box>
+        <ListItemText primary={wine.name} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <WineListRowDetails bottles={wine.bottles} />
+      </Collapse>
+    </Box>
+  );
 }
 
 WineListRow.propTypes = {
