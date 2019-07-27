@@ -8,11 +8,28 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField
 } from '@material-ui/core';
 import { createBottle } from '../../../../clients/bottle-client';
 
 export default function AddBottleModal({ open, close }) {
+  const bottleSizes = [
+    { value: 37, name: 'Demi-bouteille' },
+    { value: 50, name: 'Demi-litre' },
+    { value: 62, name: 'Jura' },
+    { value: 75, name: 'Bouteille' },
+    { value: 150, name: 'Magnum' },
+    { value: 300, name: 'Jéroboam' },
+    { value: 600, name: 'Mathusalem' },
+    { value: 1200, name: 'Salmanazar' },
+    { value: 1800, name: 'Balthazar' },
+    { value: 2400, name: 'Nabuchodonosor' }
+  ];
+
   const [bottle, setBottle] = useState({
     Year: 2019,
     Size: 75,
@@ -43,26 +60,39 @@ export default function AddBottleModal({ open, close }) {
               <TextField
                 id="bottleYear"
                 type="number"
-                label="Year"
+                label="Année"
                 value={bottle.Year}
                 onChange={handleNumberChange('Year')}
                 autoFocus
               />
             </Box>
             <Box display="inline-block" mr={2}>
-              <TextField
-                id="bottleSize"
-                type="number"
-                label="Size"
-                value={bottle.Size}
-                onChange={handleNumberChange('Size')}
-              />
+              <FormControl>
+                <InputLabel htmlFor="bottleSize">Bouteille</InputLabel>
+                <Select
+                  value={bottle.Size}
+                  onChange={handleNumberChange('Size')}
+                  inputProps={{
+                    id: 'bottleSize'
+                  }}
+                  renderValue={value =>
+                    `${
+                      bottleSizes.find(bottleSize => bottleSize.value === value)
+                        .name
+                    } - ${value}ml`
+                  }
+                >
+                  {bottleSizes.map(bottle => (
+                    <MenuItem value={bottle.value}>{bottle.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
             <Box display="inline-block" mr={2}>
               <TextField
                 id="bottleQuantity"
                 type="number"
-                label="Quantity"
+                label="Quantité"
                 value={bottle.Quantity}
                 onChange={handleNumberChange('Quantity')}
               />
