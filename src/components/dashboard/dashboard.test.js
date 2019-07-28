@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { getWines } from '../../clients/wine-client';
-import { aWine } from '../../test/wine.factory';
+import { getBottlesForCellarId } from '../../clients/bottle-client';
+import { aBottle } from '../../test/wine.factory';
 import Dashboard from '.';
-jest.mock('../../clients/wine-client');
+jest.mock('../../clients/bottle-client');
 
 describe('Dashboard', () => {
   it('should display no data component if no wine is returned', () => {
-    getWines.mockImplementation(() => Promise.resolve([]));
+    getBottlesForCellarId.mockImplementation(() => Promise.resolve([]));
 
     const component = mount(<Dashboard />);
 
@@ -16,9 +16,9 @@ describe('Dashboard', () => {
   });
 
   it('should display wine list component if some wines are returned', () => {
-    getWines.mockImplementation(() => Promise.resolve([
-      aWine(),
-    ]));
+    getBottlesForCellarId.mockImplementation(() =>
+      Promise.resolve([aBottle()])
+    );
 
     const component = mount(<Dashboard />);
 

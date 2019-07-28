@@ -34,7 +34,8 @@ export default function AddBottleModal({ open, close }) {
     Year: 2019,
     Size: 75,
     Quantity: 1,
-    CellarID: 123
+    CellarID: 5662025548038144,
+    WineID: 5744378123386880
   });
 
   const addBottle = () => {
@@ -82,8 +83,10 @@ export default function AddBottleModal({ open, close }) {
                     } - ${value}ml`
                   }
                 >
-                  {bottleSizes.map(bottle => (
-                    <MenuItem value={bottle.value}>{bottle.name}</MenuItem>
+                  {bottleSizes.map((bottle, index) => (
+                    <MenuItem key={index} value={bottle.value}>
+                      {bottle.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>

@@ -4,7 +4,7 @@ import { Box, Collapse, ListItem, ListItemText } from '@material-ui/core';
 import { ExpandLess, ExpandMore, LabelTwoTone } from '@material-ui/icons';
 import WineListRowDetails from './wine-list-row-details';
 
-export default function WineListRow({ wine }) {
+export default function WineListRow({ bottle }) {
   const labelColors = {
     red: '#990033',
     rose: '#ffcccc',
@@ -23,31 +23,45 @@ export default function WineListRow({ wine }) {
         <Box mr={1}>
           <LabelTwoTone
             style={{
-              color: labelColors[wine.color.toLowerCase()]
+              color: labelColors[bottle.wine.color.toLowerCase()]
             }}
           />
         </Box>
-        <ListItemText primary={wine.name} />
+        <ListItemText primary={bottle.wine.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <WineListRowDetails bottles={wine.bottles} />
+        <WineListRowDetails bottle={bottle} />
       </Collapse>
     </Box>
   );
 }
 
 WineListRow.propTypes = {
-  wine: Types.shape({
-    name: Types.string.isRequired,
-    color: Types.string.isRequired,
-    type: Types.string,
-    bottles: Types.arrayOf(
+  bottle: Types.shape({
+    year: Types.number.isRequired,
+    size: Types.string.isRequired,
+    quantity: Types.number.isRequired,
+    cellarID: Types.number.isRequired,
+    wine: Types.shape({
+      name: Types.string.isRequired,
+      designation: Types.string.isRequired,
+      growth: Types.string.isRequired,
+      country: Types.string.isRequired,
+      region: Types.string.isRequired,
+      color: Types.string.isRequired,
+      type: Types.string.isRequired,
+      producer: Types.string.isRequired
+    }),
+    history: Types.arrayOf(
       Types.shape({
-        year: Types.number.isRequired,
-        size: Types.string.isRequired,
-        quantity: Types.number.isRequired
+        time: Types.string.isRequired,
+        quantity: Types.number.isRequired,
+        details: Types.string.isRequired
       }).isRequired
-    ).isRequired
+    ).isRequired,
+    storageLocation: Types.shape({
+      position: Types.string.isRequired
+    }).isRequired
   })
 };
