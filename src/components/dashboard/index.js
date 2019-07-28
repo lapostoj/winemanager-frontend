@@ -1,50 +1,36 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container } from '@material-ui/core';
 import NoData from './no-data';
 import WineList from './wine-list';
 import { getBottlesForCellarId } from '../../clients/bottle-client';
 
-export default class Dashboard extends Component {
-  static CELLAR_ID = 5662025548038144;
+export default function Dashboard() {
+  const CELLAR_ID = 5662025548038144;
+  const [bottles, setBottles] = useState([]);
 
-  constructor() {
-    super();
-    this.state = {
-      bottles: []
-    };
-  }
+  useEffect(() => {
+    loadBottles();
+  }, []);
 
-  componentDidMount() {
-    this.loadBottles();
-  }
-
-  loadBottles() {
-    getBottlesForCellarId(Dashboard.CELLAR_ID)
+  const loadBottles = () => {
+    getBottlesForCellarId(CELLAR_ID)
       .then(bottles => {
-        this.setState({ bottles });
+        setBottles(bottles);
       })
       .catch(error => {
         console.error(error);
       });
-  }
+  };
 
-  setWines(bottles) {
-    this.setState({ bottles });
-  }
-
-  render() {
-    const { bottles } = this.state;
-
-    return (
-      <Container classes={{ root: 'dashboard' }}>
-        <Box display="flex" justifyContent="center">
-          {bottles.length !== 0 ? (
-            <WineList bottles={bottles} />
-          ) : (
-            <NoData onDataAdded={wines => this.setWines(wines)} />
-          )}
-        </Box>
-      </Container>
-    );
-  }
+  return (
+    <Container classes={{ root: 'dashboard' }}>
+      <Box display="flex" justifyContent="center">
+        {bottles.length !== 0 ? (
+          <WineList bottles={bottles} />
+        ) : (
+          <NoData onDataAdded={wines => setBottles(wines)} />
+        )}
+      </Box>
+    </Container>
+  );
 }
