@@ -21,8 +21,8 @@ describe('Upload Form', () => {
     const wines = [
       {
         name: 'name',
-        color: 'RED',
-      },
+        color: 'RED'
+      }
     ];
     uploadFile.mockImplementation(() => Promise.resolve(wines));
     const file = new File(['filecontent'], 'filename.ext');
@@ -45,7 +45,7 @@ function inputFile(component, file) {
   component.find('input').simulate('change', {
     target: {
       files: [file]
-    },
+    }
   });
 }
 
