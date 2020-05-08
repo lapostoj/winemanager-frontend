@@ -13,10 +13,10 @@ describe('getBottlesForCellarId', () => {
       .get(`/bottles?cellarID=${cellarId}`)
       .reply(200, bottlesResponse, {
         'Access-Control-Allow-Origin': '*',
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       });
 
-    return getBottlesForCellarId(123).then(bottles =>
+    return getBottlesForCellarId(123).then((bottles) =>
       expect(bottles).toEqual(bottlesResponse)
     );
   });
@@ -26,13 +26,11 @@ describe('createBottle', () => {
   it('post a bottle and return its id', () => {
     const bottle = aBottle();
     const idResponse = { id: '' };
-    nock(API_HOST)
-      .post('/bottles', bottle)
-      .reply(200, idResponse, {
-        'Access-Control-Allow-Origin': '*',
-        'Content-type': 'application/json'
-      });
+    nock(API_HOST).post('/bottles', bottle).reply(200, idResponse, {
+      'Access-Control-Allow-Origin': '*',
+      'Content-type': 'application/json',
+    });
 
-    return createBottle(bottle).then(id => expect(id).toEqual(idResponse));
+    return createBottle(bottle).then((id) => expect(id).toEqual(idResponse));
   });
 });

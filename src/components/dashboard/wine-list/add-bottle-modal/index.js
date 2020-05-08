@@ -12,7 +12,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField
+  TextField,
 } from '@material-ui/core';
 import { createBottle } from '../../../../clients/bottle-client';
 
@@ -27,7 +27,7 @@ export default function AddBottleModal({ open, close }) {
     { value: 600, name: 'Mathusalem' },
     { value: 1200, name: 'Salmanazar' },
     { value: 1800, name: 'Balthazar' },
-    { value: 2400, name: 'Nabuchodonosor' }
+    { value: 2400, name: 'Nabuchodonosor' },
   ];
 
   const [bottle, setBottle] = useState({
@@ -35,7 +35,7 @@ export default function AddBottleModal({ open, close }) {
     Size: 75,
     Quantity: 1,
     CellarID: 5662025548038144,
-    WineID: 5744378123386880
+    WineID: 5744378123386880,
   });
 
   const addBottle = () => {
@@ -44,7 +44,7 @@ export default function AddBottleModal({ open, close }) {
     });
   };
 
-  const handleNumberChange = name => event => {
+  const handleNumberChange = (name) => (event) => {
     setBottle({ ...bottle, [name]: Number(event.target.value) });
   };
 
@@ -74,12 +74,13 @@ export default function AddBottleModal({ open, close }) {
                   value={bottle.Size}
                   onChange={handleNumberChange('Size')}
                   inputProps={{
-                    id: 'bottleSize'
+                    id: 'bottleSize',
                   }}
-                  renderValue={value =>
+                  renderValue={(value) =>
                     `${
-                      bottleSizes.find(bottleSize => bottleSize.value === value)
-                        .name
+                      bottleSizes.find(
+                        (bottleSize) => bottleSize.value === value
+                      ).name
                     } - ${value}ml`
                   }
                 >
@@ -117,5 +118,5 @@ export default function AddBottleModal({ open, close }) {
 
 AddBottleModal.propTypes = {
   open: Types.bool.isRequired,
-  close: Types.func.isRequired
+  close: Types.func.isRequired,
 };

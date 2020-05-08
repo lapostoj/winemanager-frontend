@@ -13,10 +13,10 @@ describe('getCellarsForAccountId', () => {
       .get(`/cellars?accountID=${accountID}`)
       .reply(200, cellarsResponse, {
         'Access-Control-Allow-Origin': '*',
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       });
 
-    return getCellarsForAccountId(123).then(cellars =>
+    return getCellarsForAccountId(123).then((cellars) =>
       expect(cellars).toEqual(cellarsResponse)
     );
   });
@@ -26,13 +26,11 @@ describe('createCellar', () => {
   it('post a cellar and return its id', () => {
     const cellar = aCellar();
     const idResponse = { id: '' };
-    nock(API_HOST)
-      .post('/cellars', cellar)
-      .reply(200, idResponse, {
-        'Access-Control-Allow-Origin': '*',
-        'Content-type': 'application/json'
-      });
+    nock(API_HOST).post('/cellars', cellar).reply(200, idResponse, {
+      'Access-Control-Allow-Origin': '*',
+      'Content-type': 'application/json',
+    });
 
-    return createCellar(cellar).then(id => expect(id).toEqual(idResponse));
+    return createCellar(cellar).then((id) => expect(id).toEqual(idResponse));
   });
 });

@@ -3,7 +3,7 @@ import Types from 'prop-types';
 import { Box } from '@material-ui/core';
 
 export default function WineListRowDetails({ bottle }) {
-  const capitalize = string => {
+  const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
   };
 
@@ -42,17 +42,17 @@ WineListRowDetails.propTypes = {
       region: Types.string.isRequired,
       color: Types.string.isRequired,
       type: Types.string.isRequired,
-      producer: Types.string.isRequired
+      producer: Types.string.isRequired,
     }),
     history: Types.arrayOf(
       Types.shape({
         time: Types.string.isRequired,
         quantity: Types.number.isRequired,
-        details: Types.string.isRequired
+        details: Types.string.isRequired,
       }).isRequired
     ).isRequired,
     storageLocation: Types.shape({
-      position: Types.string.isRequired
-    }).isRequired
-  })
+      position: Types.string.isRequired,
+    }).isRequired,
+  }),
 };

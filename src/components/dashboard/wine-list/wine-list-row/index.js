@@ -8,7 +8,7 @@ export default function WineListRow({ bottle }) {
   const labelColors = {
     red: '#990033',
     rose: '#ffcccc',
-    white: '#e6e6b3'
+    white: '#e6e6b3',
   };
 
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ export default function WineListRow({ bottle }) {
         <Box mr={1}>
           <LabelTwoTone
             style={{
-              color: labelColors[bottle.wine.color.toLowerCase()]
+              color: labelColors[bottle.wine.color.toLowerCase()],
             }}
           />
         </Box>
@@ -51,17 +51,17 @@ WineListRow.propTypes = {
       region: Types.string.isRequired,
       color: Types.string.isRequired,
       type: Types.string.isRequired,
-      producer: Types.string.isRequired
+      producer: Types.string.isRequired,
     }),
     history: Types.arrayOf(
       Types.shape({
         time: Types.string.isRequired,
         quantity: Types.number.isRequired,
-        details: Types.string.isRequired
+        details: Types.string.isRequired,
       }).isRequired
     ).isRequired,
     storageLocation: Types.shape({
-      position: Types.string.isRequired
-    }).isRequired
-  })
+      position: Types.string.isRequired,
+    }).isRequired,
+  }),
 };

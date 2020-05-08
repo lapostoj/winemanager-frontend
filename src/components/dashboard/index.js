@@ -14,10 +14,10 @@ export default function Dashboard() {
 
   const loadBottles = () => {
     getBottlesForCellarId(CELLAR_ID)
-      .then(bottles => {
+      .then((bottles) => {
         setBottles(bottles);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -28,7 +28,7 @@ export default function Dashboard() {
         {bottles.length !== 0 ? (
           <WineList bottles={bottles} />
         ) : (
-          <NoData onDataAdded={wines => setBottles(wines)} />
+          <NoData onDataAdded={(wines) => setBottles(wines)} />
         )}
       </Box>
     </Container>

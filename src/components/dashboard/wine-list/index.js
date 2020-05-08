@@ -58,18 +58,18 @@ WineList.propTypes = {
         region: Types.string.isRequired,
         color: Types.string.isRequired,
         type: Types.string.isRequired,
-        producer: Types.string.isRequired
+        producer: Types.string.isRequired,
       }),
       history: Types.arrayOf(
         Types.shape({
           time: Types.string.isRequired,
           quantity: Types.number.isRequired,
-          details: Types.string.isRequired
+          details: Types.string.isRequired,
         }).isRequired
       ).isRequired,
       storageLocation: Types.shape({
-        position: Types.string.isRequired
-      }).isRequired
+        position: Types.string.isRequired,
+      }).isRequired,
     })
-  ).isRequired
+  ).isRequired,
 };

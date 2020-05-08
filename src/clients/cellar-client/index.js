@@ -5,11 +5,11 @@ export function getCellarsForAccountId(accountId) {
   return fetch(url, {
     method: 'GET',
     headers: new Headers({
-      Accept: 'application/json'
+      Accept: 'application/json',
     }),
     mode: 'cors',
-    cache: 'no-cache'
-  }).then(response => {
+    cache: 'no-cache',
+  }).then((response) => {
     if (response.ok) {
       return response.json();
     }
@@ -22,12 +22,12 @@ export function createCellar(cellar) {
   return fetch(url, {
     method: 'POST',
     headers: new Headers({
-      Accept: 'application/json'
+      Accept: 'application/json',
     }),
     mode: 'cors',
     cache: 'default',
-    body: JSON.stringify(cellar)
-  }).then(response => {
+    body: JSON.stringify(cellar),
+  }).then((response) => {
     if (response.ok) {
       return response.json();
     }

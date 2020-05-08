@@ -5,25 +5,25 @@ import { uploadFile } from '../../../../clients/wine-client';
 export default function UploadForm({ onUpload }) {
   let file;
 
-  const handleFileInput = event => {
+  const handleFileInput = (event) => {
     file = event.target.files[0];
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (file) {
       uploadFileAsFormData(file);
     }
   };
 
-  const uploadFileAsFormData = file => {
+  const uploadFileAsFormData = (file) => {
     const data = new FormData();
     data.append('file', file);
     uploadFile(data)
-      .then(wines => {
+      .then((wines) => {
         onUpload(wines);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
