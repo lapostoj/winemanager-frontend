@@ -7,7 +7,7 @@ export function aWine(color = 'RED') {
     region: 'Bourgogne',
     color: 'RED',
     type: 'SEC',
-    producer: 'Test Producer'
+    producer: 'Test Producer',
   };
 }
 
@@ -22,12 +22,12 @@ export function aBottle() {
       {
         time: '2019-07-28 14:31:36.90297 +0100 BST',
         quantity: 3,
-        details: 'Adding bottle to stock'
-      }
+        details: 'Adding bottle to stock',
+      },
     ],
     storageLocation: {
-      position: 'There'
-    }
+      position: 'There',
+    },
   };
 }
 
@@ -35,6 +35,6 @@ export function aCellar() {
   return {
     name: 'Cellar Test',
     accountID: 1,
-    creationTime: '2019-07-28 10:40:58.213625 +0100 BST'
+    creationTime: '2019-07-28 10:40:58.213625 +0100 BST',
   };
 }

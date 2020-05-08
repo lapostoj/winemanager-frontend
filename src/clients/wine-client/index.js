@@ -5,11 +5,11 @@ export function getWines() {
   return fetch(url, {
     method: 'GET',
     headers: new Headers({
-      Accept: 'application/json'
+      Accept: 'application/json',
     }),
     mode: 'cors',
-    cache: 'no-cache'
-  }).then(response => {
+    cache: 'no-cache',
+  }).then((response) => {
     if (response.ok) {
       return response.json();
     }
@@ -22,12 +22,12 @@ export function uploadFile(data) {
   return fetch(url, {
     method: 'POST',
     headers: new Headers({
-      Accept: 'application/json'
+      Accept: 'application/json',
     }),
     mode: 'cors',
     cache: 'default',
-    body: data
-  }).then(response => {
+    body: data,
+  }).then((response) => {
     if (response.ok) {
       return response.json();
     }

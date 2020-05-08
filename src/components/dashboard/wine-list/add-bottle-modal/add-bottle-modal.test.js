@@ -39,10 +39,7 @@ describe('AddBottleModal', () => {
 
     const component = shallow(<AddBottleModal open={true} close={close} />);
 
-    component
-      .find('WithStyles(ForwardRef(Button))')
-      .get(0)
-      .props.onClick();
+    component.find('WithStyles(ForwardRef(Button))').get(0).props.onClick();
     expect(close).toHaveBeenCalled();
   });
 
