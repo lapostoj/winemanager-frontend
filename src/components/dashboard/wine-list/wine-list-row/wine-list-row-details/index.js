@@ -2,28 +2,14 @@ import React from 'react';
 import Types from 'prop-types';
 import { Box } from '@material-ui/core';
 
+const pluralize = (string, number) => (number < 2 ? string : `${string}s`);
+
 export default function WineListRowDetails({ bottle }) {
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-  };
-
-  // const renderBottleInfo = (bottle, index) => {
-  //   const isLast = index === bottles.length - 1;
-  //   return (
-  //     <Box
-  //       key={index}
-  //       p={3}
-  //       borderBottom={isLast ? null : 1}
-  //       borderColor="grey.200"
-  //     >
-  //       {bottle.quantity} {capitalize(bottle.size)} from {bottle.year}.
-  //     </Box>
-  //   );
-  // };
-
   return (
     <Box p={3} borderColor="grey.200">
-      {bottle.quantity} {capitalize(bottle.size)} from {bottle.year}.
+      {`${bottle.quantity} ${pluralize(bottle.size).toLowerCase()} de l'année ${
+        bottle.year
+      }.`}
     </Box>
   );
 }

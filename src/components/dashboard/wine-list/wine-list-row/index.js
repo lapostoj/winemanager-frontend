@@ -1,39 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Types from 'prop-types';
-import { Box, Collapse, ListItem, ListItemText } from '@material-ui/core';
-import { ExpandLess, ExpandMore, LabelTwoTone } from '@material-ui/icons';
+import {
+  Box,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  Typography,
+} from '@material-ui/core';
+import { ExpandMore, LabelTwoTone } from '@material-ui/icons';
 import WineListRowDetails from './wine-list-row-details';
 
+const LabelColors = {
+  red: '#990033',
+  rose: '#ffcccc',
+  white: '#e6e6b3',
+};
+
 export default function WineListRow({ bottle }) {
-  const labelColors = {
-    red: '#990033',
-    rose: '#ffcccc',
-    white: '#e6e6b3',
-  };
-
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
   return (
-    <Box borderBottom={1} borderColor="grey.400">
-      <ListItem button onClick={handleClick}>
+    <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
+      <ExpansionPanelSummary
+        id={`row-${bottle.wine.name}`}
+        aria-controls={`row-${bottle.wine.name}`}
+        expandIcon={<ExpandMore />}
+      >
         <Box mr={1}>
           <LabelTwoTone
-            style={{
-              color: labelColors[bottle.wine.color.toLowerCase()],
-            }}
+            style={{ color: LabelColors[bottle.wine.color.toLowerCase()] }}
           />
         </Box>
-        <ListItemText primary={bottle.wine.name} />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+        <Typography>{bottle.wine.name}</Typography>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
         <WineListRowDetails bottle={bottle} />
-      </Collapse>
-    </Box>
+      </ExpansionPanelDetails>
+    </ExpansionPanel>
   );
 }
 

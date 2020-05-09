@@ -10,7 +10,7 @@ describe('Wine List Row Body', () => {
     const component = shallow(<WineListRowDetails bottle={bottle} />);
 
     expect(component.text()).toContain(3);
-    expect(component.text()).toContain('Bottle');
+    expect(component.text()).toContain('bottles');
     expect(component.text()).toContain('1963');
   });
 });
