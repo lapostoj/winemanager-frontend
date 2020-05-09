@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Types from 'prop-types';
-import { Box, Button, List, Paper, Typography } from '@material-ui/core';
+import { Box, Button, List, Typography } from '@material-ui/core';
 import WineListRow from './wine-list-row';
 import AddBottleModal from './add-bottle-modal';
 
@@ -30,14 +30,10 @@ export default function WineList({ bottles }) {
           Ajouter une bouteille
         </Button>
       </Box>
-      <Paper>
-        <Box p={3}>
-          <Typography variant="h4" gutterBottom>
-            Vos vins
-          </Typography>
-          <List component="div">{bottles.map(renderWineRow)}</List>
-        </Box>
-      </Paper>
+      <Typography variant="h4" gutterBottom>
+        Vos vins
+      </Typography>
+      <List component="div">{bottles.map(renderWineRow)}</List>
       <AddBottleModal open={open} close={closeAddBottleModal} />
     </Box>
   );
