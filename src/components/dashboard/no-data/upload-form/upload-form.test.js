@@ -5,18 +5,7 @@ import UploadForm from '.';
 jest.mock('../../../../clients/wine-client');
 
 describe('Upload Form', () => {
-  it('should not upload and not call callback if button is pressed without input', () => {
-    const onUpload = jest.fn();
-    uploadFile.mockImplementation(() => Promise.resolve());
-
-    const component = mount(<UploadForm onUpload={onUpload} />);
-    clickButton(component);
-
-    expect(uploadFile).not.toHaveBeenCalled();
-    expect(onUpload).not.toHaveBeenCalled();
-  });
-
-  it('should upload and call callback if button is pressed after input', () => {
+  it('should upload and call callback if file is selected and confirmed', () => {
     const onUpload = jest.fn();
     const wines = [
       {
@@ -25,19 +14,56 @@ describe('Upload Form', () => {
       },
     ];
     uploadFile.mockImplementation(() => Promise.resolve(wines));
-    const file = new File(['filecontent'], 'filename.ext');
-    const expectedDate = new FormData();
-    expectedDate.append('file', file);
+    const file = new File(['filecontent'], 'filename.csv');
 
     const component = mount(<UploadForm onUpload={onUpload} />);
-    inputFile(component, file);
-    clickButton(component);
+    expect(component.find('#input-file-wines')).toHaveLength(1);
+    expect(
+      component.find('#button-select-file > .MuiButton-label')
+    ).toHaveLength(1);
 
-    expect(uploadFile).toHaveBeenCalled();
-    expect(component.find('button').prop('type')).toBe('submit');
+    inputFile(component, file);
     setImmediate(() => {
-      expect(onUpload).toHaveBeenCalledWith(wines);
+      expect(component.find('#input-file-wines')).toHaveLength(0);
+      expect(
+        component.find('#button-select-file > .MuiButton-label')
+      ).toHaveLength(0);
+      expect(component.find('#filename > p').text()).toEqual(
+        expect.stringContaining('filename.csv')
+      );
     });
+
+    clickButton(component, '#button-confirm-file > button');
+    expect(uploadFile).toHaveBeenCalled();
+    setImmediate(() => expect(onUpload).toHaveBeenCalledWith(wines));
+    uploadFile.mockReset();
+  });
+
+  it('should be able to delete file before confirming', () => {
+    const onUpload = jest.fn();
+    const wines = [
+      {
+        name: 'name',
+        color: 'RED',
+      },
+    ];
+    uploadFile.mockImplementation(() => Promise.resolve(wines));
+    const file = new File(['filecontent'], 'filename.csv');
+
+    const component = mount(<UploadForm onUpload={onUpload} />);
+    expect(component.find('#input-file-wines')).toHaveLength(1);
+    expect(
+      component.find('#button-select-file > .MuiButton-label')
+    ).toHaveLength(1);
+
+    inputFile(component, file);
+    expect(component.find('#input-file-wines')).toHaveLength(0);
+
+    clickButton(component, '#button-delete-file > button');
+    expect(component.find('#input-file-wines')).toHaveLength(1);
+    expect(uploadFile).not.toHaveBeenCalled();
+    expect(onUpload).not.toHaveBeenCalled();
+    uploadFile.mockReset();
   });
 });
 
@@ -49,6 +75,6 @@ function inputFile(component, file) {
   });
 }
 
-function clickButton(component) {
-  component.find('button').simulate('submit');
+function clickButton(component, selector) {
+  component.find(selector).simulate('click');
 }
