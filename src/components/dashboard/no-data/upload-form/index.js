@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import WineFileExample from './wine-file-example';
 import { uploadFile } from '../../../../clients/wine-client';
 
 export default function UploadForm({ onUpload }) {
@@ -37,25 +38,28 @@ export default function UploadForm({ onUpload }) {
     <>
       {file === null ? (
         <>
-          <input
-            id="input-file-wines"
-            name="input-file-wines"
-            type="file"
-            accept=".csv"
-            autoFocus
-            onChange={addFile}
-            style={{ display: 'none' }}
-          />
-          <label htmlFor="input-file-wines">
-            <Button
-              id="button-select-file"
-              variant="contained"
-              color="primary"
-              component="span"
-            >
-              Choisir un fichier
-            </Button>
-          </label>
+          <Box mb={4}>
+            <input
+              id="input-file-wines"
+              name="input-file-wines"
+              type="file"
+              accept=".csv"
+              autoFocus
+              onChange={addFile}
+              style={{ display: 'none' }}
+            />
+            <label htmlFor="input-file-wines">
+              <Button
+                id="button-select-file"
+                variant="contained"
+                color="primary"
+                component="span"
+              >
+                Choisir un fichier
+              </Button>
+            </label>
+          </Box>
+          <WineFileExample />
         </>
       ) : (
         <>
