@@ -104,6 +104,9 @@ export default function AddBottleModal({ open, close }) {
               variant="outlined"
               value={bottle.Quantity}
               onChange={handleNumberChange('Quantity')}
+              inputProps={{
+                min: 1,
+              }}
             />
           </Box>
         </Box>
