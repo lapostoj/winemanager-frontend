@@ -7,9 +7,10 @@ const pluralize = (string, number) => (number < 2 ? string : `${string}s`);
 export default function WineListRowDetails({ bottle }) {
   return (
     <Box p={3} borderColor="grey.200">
-      {`${bottle.quantity} ${pluralize(bottle.size).toLowerCase()} de l'année ${
-        bottle.year
-      }.`}
+      {`${bottle.quantity} ${pluralize(
+        bottle.size,
+        bottle.quantity
+      ).toLowerCase()} de l'année ${bottle.year}.`}
     </Box>
   );
 }
