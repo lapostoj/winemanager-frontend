@@ -10,7 +10,8 @@ describe('getBottlesForCellarId', () => {
     const bottlesResponse = [aBottle(), aBottle()];
 
     nock(API_HOST)
-      .get(`/bottles?cellarID=${cellarId}`)
+      .get('/bottles')
+      .query((query) => query.cellarID === `${cellarId}`)
       .reply(200, bottlesResponse, {
         'Access-Control-Allow-Origin': '*',
         'Content-type': 'application/json',
