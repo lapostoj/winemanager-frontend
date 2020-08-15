@@ -1,10 +1,10 @@
 import React from 'react';
 import Types from 'prop-types';
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
   Typography,
 } from '@material-ui/core';
 import { ExpandMore, LabelTwoTone } from '@material-ui/icons';
@@ -18,8 +18,8 @@ const LabelColors = {
 
 export default function WineListRow({ bottle }) {
   return (
-    <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
-      <ExpansionPanelSummary
+    <Accordion TransitionProps={{ unmountOnExit: true }}>
+      <AccordionSummary
         id={`row-${bottle.wine.name}`}
         aria-controls={`row-${bottle.wine.name}`}
         expandIcon={<ExpandMore />}
@@ -30,11 +30,11 @@ export default function WineListRow({ bottle }) {
           />
         </Box>
         <Typography>{bottle.wine.name}</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      </AccordionSummary>
+      <AccordionDetails>
         <WineListRowDetails bottle={bottle} />
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 
