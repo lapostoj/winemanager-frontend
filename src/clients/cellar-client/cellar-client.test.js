@@ -10,7 +10,8 @@ describe('getCellarsForAccountId', () => {
     const cellarsResponse = [aCellar(), aCellar()];
 
     nock(API_HOST)
-      .get(`/cellars?accountID=${accountID}`)
+      .get('/cellars')
+      .query((query) => query.accountID === `${accountID}`)
       .reply(200, cellarsResponse, {
         'Access-Control-Allow-Origin': '*',
         'Content-type': 'application/json',

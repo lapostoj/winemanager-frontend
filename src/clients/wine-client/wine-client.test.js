@@ -7,10 +7,13 @@ describe('getWines', () => {
   it('returns list of wines', () => {
     const winesResponse = [{}, {}];
 
-    nock(API_HOST).get('/wines').reply(200, winesResponse, {
-      'Access-Control-Allow-Origin': '*',
-      'Content-type': 'application/json',
-    });
+    nock(API_HOST)
+      .get('/wines')
+      .query((query) => true)
+      .reply(200, winesResponse, {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+      });
 
     return getWines().then((wines) => expect(wines).toEqual(winesResponse));
   });
