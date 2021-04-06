@@ -1,59 +1,51 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createBottle } from '../../../../clients/bottle-client';
 import AddBottleModal from '.';
 jest.mock('../../../../clients/bottle-client');
 
-describe('AddBottleModal', () => {
-  it('should render with open', () => {
-    const close = jest.fn();
+test('renders visible when open is true', () => {
+  const close = jest.fn();
 
-    const component = shallow(<AddBottleModal open={true} close={close} />);
+  render(<AddBottleModal open={true} close={close} />);
 
-    expect(component.find('WithStyles(ForwardRef(Dialog))').prop('open')).toBe(
-      true
-    );
-  });
+  expect(screen.getByRole('presentation')).toBeVisible();
+});
 
-  it('should render with not open', () => {
-    const close = jest.fn();
+test('renders not visible when open is false', () => {
+  const close = jest.fn();
 
-    const component = shallow(<AddBottleModal open={false} close={close} />);
+  render(<AddBottleModal open={false} close={close} />);
 
-    expect(component.find('WithStyles(ForwardRef(Dialog))').prop('open')).toBe(
-      false
-    );
-  });
+  expect(screen.queryByRole('presentation')).toBeNull();
+});
 
-  it('should pass close to onClose', () => {
-    const close = jest.fn();
+test('passes close to onClose', () => {
+  const close = jest.fn();
 
-    const component = shallow(<AddBottleModal open={true} close={close} />);
+  render(<AddBottleModal open={true} close={close} />);
+  userEvent.click(screen.getByRole('none'));
 
-    component.find('WithStyles(ForwardRef(Dialog))').prop('onClose')();
-    expect(close).toHaveBeenCalled();
-  });
+  expect(close).toHaveBeenCalled();
+});
 
-  it('should pass close to cancel button', () => {
-    const close = jest.fn();
+test('passes close to cancel button', () => {
+  const close = jest.fn();
 
-    const component = shallow(<AddBottleModal open={true} close={close} />);
+  render(<AddBottleModal open={true} close={close} />);
 
-    component.find('WithStyles(ForwardRef(Button))').get(0).props.onClick();
-    expect(close).toHaveBeenCalled();
-  });
+  userEvent.click(screen.getByText('Annuler').closest('button'));
+  expect(close).toHaveBeenCalled();
+});
 
-  it('should call close after adding bottle', async () => {
-    const close = jest.fn();
-    createBottle.mockImplementation(() => Promise.resolve());
+test('calls close after adding bottle', async () => {
+  const close = jest.fn();
+  createBottle.mockImplementation(() => Promise.resolve());
 
-    const component = shallow(<AddBottleModal open={true} close={close} />);
+  render(<AddBottleModal open={true} close={close} />);
+  userEvent.click(screen.getByText('Ajouter').closest('button'));
 
-    await component
-      .find('WithStyles(ForwardRef(Button))')
-      .get(1)
-      .props.onClick();
-    expect(createBottle).toHaveBeenCalled();
-    expect(close).toHaveBeenCalled();
-  });
+  expect(createBottle).toHaveBeenCalled();
+  await waitFor(() => expect(close).toHaveBeenCalled());
 });
