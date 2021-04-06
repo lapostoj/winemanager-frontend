@@ -5,7 +5,7 @@ export function aWine(color = 'RED') {
     growth: 'Test Growth',
     country: 'FR',
     region: 'Bourgogne',
-    color: 'RED',
+    color,
     type: 'SEC',
     producer: 'Test Producer',
   };

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import NoData from '.';
 
-describe('No Data', () => {
-  it('should pass onDataAdded callback to UploadForm', () => {
-    const onDataAdded = () => {};
+test('displays UploadForm', async () => {
+  const onDataAdded = jest.fn();
 
-    const component = mount(<NoData onDataAdded={onDataAdded} />);
+  render(<NoData onDataAdded={onDataAdded} />);
 
-    expect(component.find('UploadForm').props().onUpload).toEqual(onDataAdded);
-  });
+  expect(screen.getByText('Choisir un fichier')).toBeVisible();
 });

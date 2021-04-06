@@ -1,51 +1,52 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { aBottle } from '../../../test/wine.factory';
 import WineList from '.';
 
-describe('Wine List', () => {
-  it('should render no row if the list in props is empty', () => {
-    const bottles = [];
+const MODAL_TITLE = 'Entrer les détails de la bouteille à ajouter.';
 
-    const component = shallow(<WineList bottles={bottles} />);
+test('renders no row if the list in props is empty', () => {
+  const bottles = [];
 
-    expect(component.text()).toContain('Vos vins');
-    expect(component.find('WineListRow')).toHaveLength(0);
-  });
+  render(<WineList bottles={bottles} />);
 
-  it('should render one row per item in the list in props', () => {
-    const bottles = [aBottle(), aBottle()];
+  expect(screen.getByText('Vos vins')).toBeVisible();
+  expect(screen.queryByText('Test Wine')).toBeNull();
+});
 
-    const component = shallow(<WineList bottles={bottles} />);
+test('renders one row per item in the list in props', () => {
+  const bottles = [aBottle(), aBottle()];
 
-    expect(component.text()).toContain('Vos vins');
-    expect(component.find('WineListRow')).toHaveLength(2);
-  });
+  render(<WineList bottles={bottles} />);
 
-  it('should render with AddBottleModal closed', () => {
-    const bottles = [];
+  expect(screen.getByText('Vos vins')).toBeVisible();
+  expect(screen.getAllByText('Test Wine')).toHaveLength(2);
+});
 
-    const component = shallow(<WineList bottles={bottles} />);
+test('renders with AddBottleModal closed', () => {
+  const bottles = [];
 
-    expect(component.find('AddBottleModal').prop('open')).toBe(false);
-  });
+  render(<WineList bottles={bottles} />);
 
-  it('should open AddBottleModal on button click', () => {
-    const bottles = [];
+  expect(screen.queryByText(MODAL_TITLE)).toBeNull();
+});
 
-    const component = shallow(<WineList bottles={bottles} />);
-    component.find('WithStyles(ForwardRef(Button))').prop('onClick')();
+test('opens AddBottleModal on button click', () => {
+  const bottles = [];
 
-    expect(component.find('AddBottleModal').prop('open')).toBe(true);
-  });
+  render(<WineList bottles={bottles} />);
+  userEvent.click(screen.getByText('Ajouter une bouteille').closest('button'));
 
-  it('should update state with function passed to modal close', () => {
-    const bottles = [];
+  expect(screen.getByText(MODAL_TITLE)).toBeVisible();
+});
 
-    const component = shallow(<WineList bottles={bottles} />);
-    component.find('WithStyles(ForwardRef(Button))').prop('onClick')();
-    component.find('AddBottleModal').prop('close')();
+test('updates state with function passed to modal close', () => {
+  const bottles = [];
 
-    expect(component.find('AddBottleModal').prop('open')).toBe(false);
-  });
+  render(<WineList bottles={bottles} />);
+  userEvent.click(screen.getByText('Ajouter une bouteille').closest('button'));
+  userEvent.click(screen.getByText('Annuler').closest('button'));
+
+  expect(screen.queryByText(MODAL_TITLE)).not.toBeVisible();
 });

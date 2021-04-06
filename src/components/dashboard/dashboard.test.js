@@ -1,38 +1,28 @@
 import * as React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getBottlesForCellarId } from '../../clients/bottle-client';
 import { aBottle } from '../../test/wine.factory';
 import Dashboard from '.';
 jest.mock('../../clients/bottle-client');
 
-describe('Dashboard', () => {
-  it('should display no data component if no wine is returned', async () => {
-    getBottlesForCellarId.mockImplementation(() => Promise.resolve([]));
+test('displays no data component if no wine is returned', async () => {
+  getBottlesForCellarId.mockImplementation(() => Promise.resolve([]));
 
-    let component;
-    await act(async () => {
-      component = mount(<Dashboard />);
-    });
+  render(<Dashboard />);
 
-    expect(component.find('NoData')).toHaveLength(1);
-    expect(component.find('WineList')).toHaveLength(0);
+  await waitFor(() => {
+    expect(screen.getByText('Ajouter mes bouteilles')).toBeVisible();
+    expect(screen.queryByText('Vos vins')).toBeNull();
   });
+});
 
-  it('should display wine list component if some wines are returned', async () => {
-    getBottlesForCellarId.mockImplementation(() =>
-      Promise.resolve([aBottle()])
-    );
+test('displays wine list component if some wines are returned', async () => {
+  getBottlesForCellarId.mockImplementation(() => Promise.resolve([aBottle()]));
 
-    let component;
-    await act(async () => {
-      component = mount(<Dashboard />);
-    });
+  render(<Dashboard />);
 
-    setImmediate(() => {
-      component.update();
-      expect(component.find('NoData')).toHaveLength(0);
-      expect(component.find('WineList')).toHaveLength(1);
-    });
+  await waitFor(() => {
+    expect(screen.queryByText('Ajouter mes bouteilles')).toBeNull();
+    expect(screen.getByText('Vos vins')).toBeVisible();
   });
 });

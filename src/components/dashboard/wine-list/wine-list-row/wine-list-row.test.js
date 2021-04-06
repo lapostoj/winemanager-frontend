@@ -1,29 +1,24 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { aBottle } from '../../../../test/wine.factory';
 import WineListRow from '.';
 
-describe('Wine List Row', () => {
-  it('should render a collapsed row with the correct values', () => {
-    const bottle = aBottle();
+test('renders a collapsed row with the correct values', () => {
+  const bottle = aBottle();
 
-    const component = mount(<WineListRow bottle={bottle} />);
+  render(<WineListRow bottle={bottle} />);
 
-    expect(component.html()).toContain(bottle.wine.name);
-    expect(component.html()).not.toContain(bottle.year);
-  });
-
-  it('should extend the row when the title is clicked', () => {
-    const bottle = aBottle();
-
-    const component = mount(<WineListRow bottle={bottle} />);
-    clickRow(component);
-
-    expect(component.html()).toContain(bottle.wine.name);
-    expect(component.html()).toContain(bottle.year);
-  });
+  expect(screen.getByText(bottle.wine.name)).toBeVisible();
+  expect(screen.queryByText(`/${bottle.year}/`)).toBeNull();
 });
 
-function clickRow(component) {
-  component.find('[role="button"]').simulate('click');
-}
+test('extends the row when the title is clicked', () => {
+  const bottle = aBottle();
+
+  render(<WineListRow bottle={bottle} />);
+  userEvent.click(screen.getByRole('button'));
+
+  expect(screen.getByText(bottle.wine.name)).toBeVisible();
+  expect(screen.getByText(/année/)).toBeVisible();
+});
