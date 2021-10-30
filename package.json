@@ -15,7 +15,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "husky": "^7.0.4",
-    "lint-staged": "^11.2.4",
+    "lint-staged": "^11.2.6",
     "nock": "^13.1.4",
     "prettier": "^2.4.1"
   },
