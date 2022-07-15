@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Types from 'prop-types';
-import { Box, Button, List, Typography } from '@material-ui/core';
+import { Box, Button, List, Typography } from '@mui/material';
 import WineListRow from './wine-list-row';
 import AddBottleModal from './add-bottle-modal';
 

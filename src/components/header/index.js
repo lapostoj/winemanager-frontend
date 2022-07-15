@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Icon, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Icon, Toolbar, Typography } from '@mui/material';
 import logo from './grapes.svg';
 
 export default function Header() {

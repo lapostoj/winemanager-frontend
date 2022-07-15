@@ -6,8 +6,8 @@ import {
   AccordionSummary,
   Box,
   Typography,
-} from '@material-ui/core';
-import { ExpandMore, LabelTwoTone } from '@material-ui/icons';
+} from '@mui/material';
+import { ExpandMore, LabelTwoTone } from '@mui/icons-material';
 import WineListRowDetails from './wine-list-row-details';
 
 const LabelColors = {

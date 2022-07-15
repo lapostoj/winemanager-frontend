@@ -11,7 +11,7 @@ Frontend for a wine manager application. The corresponding backend for my usage 
 ## Technology
 
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-- The UI components come from [Material UI](https://material-ui.com/).
+- The UI components come from [Material UI](https://mui.com/).
 
 ## How to use
 
