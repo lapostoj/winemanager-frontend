@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container } from '@material-ui/core';
+import { Box, Container } from '@mui/material';
 import NoData from './no-data';
 import WineList from './wine-list';
 import { getBottlesForCellarId } from '../../clients/bottle-client';

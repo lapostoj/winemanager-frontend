@@ -10,9 +10,9 @@ import {
   DialogTitle,
   MenuItem,
   TextField,
-} from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+} from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { createBottle } from '../../../../clients/bottle-client';
 
 const BottleSizes = [

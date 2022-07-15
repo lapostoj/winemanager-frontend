@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, IconButton, Typography } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { Box, Button, IconButton, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import WineFileExample from './wine-file-example';
 import { uploadFile } from '../../../../clients/wine-client';
 

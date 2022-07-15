@@ -1,6 +1,6 @@
 import React from 'react';
 import Types from 'prop-types';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 const pluralize = (string, number) => (number < 2 ? string : `${string}s`);
 

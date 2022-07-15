@@ -9,14 +9,16 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-const SlightlyTransparentTableContainer = withStyles((theme) => ({
-  root: {
-    opacity: '60%',
-  },
-}))(TableContainer);
+const SlightlyTransparentTableContainer = styled(TableContainer)(
+  ({ theme }) => ({
+    root: {
+      opacity: '60%',
+    },
+  })
+);
 
 const WineExample = {
   Nom: 'Riesling - Vendanges tardives',

@@ -10,7 +10,7 @@ test('renders visible when open is true', () => {
 
   render(<AddBottleModal open={true} close={close} />);
 
-  expect(screen.getByRole('presentation')).toBeVisible();
+  expect(screen.getAllByRole('presentation').length).toBe(2);
 });
 
 test('renders not visible when open is false', () => {
@@ -25,7 +25,7 @@ test('passes close to onClose', () => {
   const close = jest.fn();
 
   render(<AddBottleModal open={true} close={close} />);
-  userEvent.click(screen.getByRole('none'));
+  userEvent.click(screen.getAllByRole('presentation')[1]);
 
   expect(close).toHaveBeenCalled();
 });

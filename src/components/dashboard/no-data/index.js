@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography } from '@mui/material';
 import UploadForm from './upload-form';
 import logo from './glass-and-bottle.svg';
 
