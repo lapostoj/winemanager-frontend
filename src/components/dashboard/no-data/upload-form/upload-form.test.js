@@ -19,17 +19,17 @@ test('uploads and call callback if file is selected and confirmed', async () => 
   render(<UploadForm onUpload={onUpload} />);
   expect(screen.getByText('Choisir un fichier')).toBeVisible();
 
-  userEvent.upload(screen.getByLabelText('Choisir un fichier'), file);
+  await userEvent.upload(screen.getByLabelText('Choisir un fichier'), file);
   expect(screen.queryByLabelText('Choisir un fichier')).toBeNull();
   expect(screen.getByText('Confirmer')).toBeVisible();
 
-  userEvent.click(screen.getByText('Confirmer').closest('button'));
+  await userEvent.click(screen.getByText('Confirmer').closest('button'));
   expect(uploadFile).toHaveBeenCalled();
   await waitFor(() => expect(onUpload).toHaveBeenCalledWith(wines));
   uploadFile.mockReset();
 });
 
-test('is able to delete file before confirming', () => {
+test('is able to delete file before confirming', async () => {
   const onUpload = jest.fn();
   const wines = [
     {
@@ -43,11 +43,11 @@ test('is able to delete file before confirming', () => {
   render(<UploadForm onUpload={onUpload} />);
   expect(screen.getByText('Choisir un fichier')).toBeVisible();
 
-  userEvent.upload(screen.getByLabelText('Choisir un fichier'), file);
+  await userEvent.upload(screen.getByLabelText('Choisir un fichier'), file);
   expect(screen.queryByLabelText('Choisir un fichier')).toBeNull();
   expect(screen.getByText('Confirmer')).toBeVisible();
 
-  userEvent.click(screen.getByLabelText('delete'));
+  await userEvent.click(screen.getByLabelText('delete'));
   expect(screen.getByText('Choisir un fichier')).toBeVisible();
   expect(uploadFile).not.toHaveBeenCalled();
   expect(onUpload).not.toHaveBeenCalled();

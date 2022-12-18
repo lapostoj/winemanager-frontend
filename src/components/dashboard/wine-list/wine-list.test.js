@@ -32,21 +32,25 @@ test('renders with AddBottleModal closed', () => {
   expect(screen.queryByText(MODAL_TITLE)).toBeNull();
 });
 
-test('opens AddBottleModal on button click', () => {
+test('opens AddBottleModal on button click', async () => {
   const bottles = [];
 
   render(<WineList bottles={bottles} />);
-  userEvent.click(screen.getByText('Ajouter une bouteille').closest('button'));
+  await userEvent.click(
+    screen.getByText('Ajouter une bouteille').closest('button')
+  );
 
   expect(screen.getByText(MODAL_TITLE)).toBeVisible();
 });
 
-test('updates state with function passed to modal close', () => {
+test('updates state with function passed to modal close', async () => {
   const bottles = [];
 
   render(<WineList bottles={bottles} />);
-  userEvent.click(screen.getByText('Ajouter une bouteille').closest('button'));
-  userEvent.click(screen.getByText('Annuler').closest('button'));
+  await userEvent.click(
+    screen.getByText('Ajouter une bouteille').closest('button')
+  );
+  await userEvent.click(screen.getByText('Annuler').closest('button'));
 
   expect(screen.queryByText(MODAL_TITLE)).not.toBeVisible();
 });

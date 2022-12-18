@@ -21,21 +21,22 @@ test('renders not visible when open is false', () => {
   expect(screen.queryByRole('presentation')).toBeNull();
 });
 
-test('passes close to onClose', () => {
+test('passes close to onClose', async () => {
   const close = jest.fn();
 
   render(<AddBottleModal open={true} close={close} />);
-  userEvent.click(screen.getAllByRole('presentation')[1]);
+  await userEvent.click(screen.getAllByRole('presentation')[1]);
 
   expect(close).toHaveBeenCalled();
 });
 
-test('passes close to cancel button', () => {
+test('passes close to cancel button', async () => {
   const close = jest.fn();
 
   render(<AddBottleModal open={true} close={close} />);
 
-  userEvent.click(screen.getByText('Annuler').closest('button'));
+  await userEvent.click(screen.getByText('Annuler').closest('button'));
+
   expect(close).toHaveBeenCalled();
 });
 
@@ -44,7 +45,7 @@ test('calls close after adding bottle', async () => {
   createBottle.mockImplementation(() => Promise.resolve());
 
   render(<AddBottleModal open={true} close={close} />);
-  userEvent.click(screen.getByText('Ajouter').closest('button'));
+  await userEvent.click(screen.getByText('Ajouter').closest('button'));
 
   expect(createBottle).toHaveBeenCalled();
   await waitFor(() => expect(close).toHaveBeenCalled());
