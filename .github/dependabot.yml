@@ -5,9 +5,23 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    groups:
+      github-actions:
+        patterns:
+          - "*"
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
       day: 'saturday'
     open-pull-requests-limit: 10
+    groups:
+      testing-library-dependencies:
+        patterns:
+          - "@testing-library/*"
+      mui-dependencies:
+        patterns:
+          - "@mui/*"
+      react-dependencies:
+        patterns:
+          - "react*"
